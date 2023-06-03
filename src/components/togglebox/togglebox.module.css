@@ -31,10 +31,23 @@
     text-decoration: none;
 }
 
+.datebtn {
+    padding: 8px 10px;
+    border-radius: 15px;
+}
+
 .btnclick {
     background-color: greenyellow;
 }
 
 .toggleboxright {
-    grid-template-columns: 1fr 1fr 2fr;
+    grid-template-columns: 1fr 0.7fr 2.3fr;
+}
+
+.toggleboxequal {
+    grid-template-columns: 2fr 3fr;
+}
+
+.aligncenter {
+    align-items: center;
 }
