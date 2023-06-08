@@ -1,9 +1,17 @@
 import styles from "./datetime.module.css";
+import PropTypes from 'prop-types';
+import { DateFromTs } from "../../util";
 
-export const DateTime = () => {
+export const DateTime = ({ weatherData }) => {
   return (
     <div className={styles.wrapper}>
-      <h2>Tuesday, 10:30</h2>
+      { weatherData && Object.keys(weatherData).length != 0 && (
+        <h2>{DateFromTs(weatherData.dt, weatherData.timezone)}</h2>
+      )}
     </div>
   );
 };
+
+DateTime.propTypes = {
+  weatherData : PropTypes.object
+}

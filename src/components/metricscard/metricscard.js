@@ -19,6 +19,9 @@ export const MetricsCard = ({ title, iconSrc, metric, unit }) => {
 MetricsCard.propTypes = {
   title : PropTypes.string,
   iconSrc : PropTypes.string,
-  metric : PropTypes.string,
+  metric : PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   unit : PropTypes.string
 }
