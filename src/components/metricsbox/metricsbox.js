@@ -17,36 +17,36 @@ export const MetricsBox = ({ weatherData, unit }) => {
       <>  
       <MetricsCard
         title={"Humidity"}
-        iconSrc={"/icons/mild-rain.png"}
+        iconSrc={"/icons/humidity.png"}
         metric={weatherData.main.humidity}
         unit={"%"}
       />
       <MetricsCard
         title={"Wind speed"}
-        iconSrc={"/icons/mild-rain.png"}
+        iconSrc={"/icons/wind.png"}
         metric={WindSpeed(weatherData.wind.speed, unit)}
         unit={unit==='metric'?'m/s':'mi/h'}
       />
       <MetricsCard
         title={"Wind direction"}
-        iconSrc={"/icons/mild-rain.png"}
+        iconSrc={"/icons/compass.png"}
         metric={WindCardinal(weatherData.wind.deg)}
       />
       <MetricsCard
         title={"Visibility"}
-        iconSrc={"/icons/mild-rain.png"}
+        iconSrc={"/icons/view.png"}
         metric={Visibility(weatherData.visibility, unit)}
         unit={unit==='metric'?'km':'mi'}
       />
       <MetricsCard
         title={"Sunrise"}
-        iconSrc={"/icons/mild-rain.png"}
+        iconSrc={"/icons/sunrise.png"}
         metric={TimeFromTs(weatherData.sys.sunrise, weatherData.timezone)}
         unit={TimePeriod(weatherData.sys.sunrise)}
       />
       <MetricsCard
         title={"Sunset"}
-        iconSrc={"/icons/mild-rain.png"}
+        iconSrc={"/icons/sunset.png"}
         metric={TimeFromTs(weatherData.sys.sunset, weatherData.timezone)}
         unit={TimePeriod(weatherData.sys.sunset)}
       /></>

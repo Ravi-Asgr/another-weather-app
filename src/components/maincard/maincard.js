@@ -11,7 +11,7 @@ export const MainCard = ({ weatherData, unit }) => {
                     {weatherData.name}, {weatherData.sys.country}
                 </h1>
                 <p className={styles.description}>{weatherData.weather[0].description}</p>
-                <img width="300px" height="300px" src='/icons/day.png'
+                <img width="300px" height="300px" src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
                     alt="weatherIcon"/>
                 <h1 className={styles.temperature}>{TempWitUnit(weatherData.main.temp, unit)}</h1>
                 <p>Feels like {TempWitUnit(weatherData.main.feels_like, unit)}</p>    

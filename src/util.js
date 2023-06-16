@@ -72,6 +72,14 @@ export const Visibility = (value, unit) => {
     return unit === 'metric' ? (value/1000).toFixed(1) : (value/1609.344).toFixed(1);
 }
 
+export const WeatherApi = (type, city) => {
+    let weatherType = 'weather';
+    if (type !== 'today') {
+        weatherType = 'forecast'
+    }
+    return `https://api.openweathermap.org/data/2.5/${weatherType}?q=${city}&appid=e557c5f711ee42279337c14a07678335&units=metric`;
+}
+
 export const FormattedForecast = async (forecastWeather) => {
     let factoredResponse = [];
     let dataArray = forecastWeather.list;
