@@ -110,6 +110,12 @@ export const FormattedForecast = async (forecastWeather) => {
     return factoredResponse;     
 }
 
+export const ApiError = (toast, message) => {
+    toast.error(message, {
+        position: toast.POSITION.TOP_CENTER
+    });
+}
+
 export const FutureDates = (x) => {
     let date = new Date();
     let dateArray = [];

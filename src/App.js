@@ -6,9 +6,10 @@ import { Header } from './components/header/header'
 import { DateTime } from './components/datetime/datetime';
 import { Search } from './components/search/search';
 import { MetricsBox } from './components/metricsbox/metricsbox';
-import { UnitSearch } from './components/unitsearch/unitsearch';
 import { ToggleBox } from './components/togglebox/togglebox';
-import { FutureDays, FormattedForecast, WeatherApi } from './util';
+import { FutureDays, FormattedForecast, WeatherApi, ApiError } from './util';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -39,7 +40,11 @@ function App() {
       console.log(`${weatherType} API call ...... refresh is ${isRefresh}`);
       const resp = await fetch(WeatherApi(weatherType, city));
       const weatherData = await resp.json();
-      if (weatherType === 'today') {
+      if (weatherData.cod === '404') {
+        ApiError(toast, weatherData.message);
+        return;
+      }
+      else if (weatherType === 'today') {
         setweatherData({...weatherData});
       } else {
         const formattedForecast = await FormattedForecast(weatherData);
@@ -106,7 +111,6 @@ function App() {
           value={city}/>
         </Header>
         <MetricsBox weatherData={weatherData} unit={unit} />
-        <UnitSearch unitSystem={'metric'} />
       </ContentBox>
     </div>
     </>
