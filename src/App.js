@@ -7,7 +7,7 @@ import { DateTime } from './components/datetime/datetime';
 import { Search } from './components/search/search';
 import { MetricsBox } from './components/metricsbox/metricsbox';
 import { ToggleBox } from './components/togglebox/togglebox';
-import { FutureDays, FormattedForecast, WeatherApi, ApiError } from './util';
+import { FutureDays, FormattedForecastHourWise, WeatherApi, ApiError } from './util';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -21,6 +21,8 @@ function App() {
   const [forecastDay, setForecastDay] = useState('');
   /* Set state of forecast date index */
   const [forecastDayIndex, setForecastDayIndex] = useState(0);
+  /* Set state of forecast date hour */
+  const [forecastDayHour, setForecastDayHour] = useState('0');
   /* Set state of forecast weather */
   //const [isForecast, setIsForecast] = useState(false);
   /* Set state for weather response*/
@@ -47,9 +49,9 @@ function App() {
       else if (weatherType === 'today') {
         setweatherData({...weatherData});
       } else {
-        const formattedForecast = await FormattedForecast(weatherData);
+        const formattedForecast = await FormattedForecastHourWise(weatherData);
         setForecastWeatherData(formattedForecast);
-        setweatherData({...formattedForecast[forecastDayIndex]});
+        setweatherData({...formattedForecast[forecastDayIndex][forecastDayHour]});
       }
     }
     apiCall();
@@ -78,7 +80,12 @@ function App() {
     //console.log('aa ' + e.currentTarget.dataset.index)
     setForecastDay(e.target.text);
     setForecastDayIndex(e.currentTarget.dataset.index);
-    setweatherData({...forecastWeatherData[e.currentTarget.dataset.index]});
+    setweatherData({...forecastWeatherData[e.currentTarget.dataset.index][forecastDayHour]});
+  }
+
+  const toggleForecastDayHour = (e) => {
+    setForecastDayHour(e.target.value);
+    setweatherData({...forecastWeatherData[forecastDayIndex][e.target.value]});
   }
 
   return (
@@ -86,7 +93,7 @@ function App() {
     <div className={styles.wrapper}>
       <ToggleBox unitSystem={unit} changeUnitFunction={toggleUnit} weatherType={weatherType} 
         changeWeatherFunction={toggleWeatherType} displayDates={dayArray} choosenDay={forecastDay}
-        toggleDay={toggleForecastDay} />  
+        toggleDay={toggleForecastDay} forecastDayHour={forecastDayHour} toggleHour={toggleForecastDayHour} />  
     </div>
 
     <div className={styles.wrapper}>
