@@ -109,3 +109,10 @@ select:-moz-focusring {
     color: transparent;
     text-shadow: 0 0 0 #000;
 }
+
+@media only screen and (max-width: 520px) {
+    .wrapper {
+        grid-template-columns: 1fr;
+        place-items: center;
+    }
+}

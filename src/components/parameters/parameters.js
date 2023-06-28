@@ -1,50 +1,43 @@
-// import { degToCompass } from "../services/converters";
-// import {
-//   getTime,
-//   getAMPM,
-//   getVisibility,
-//   getWindSpeed,
-// } from "../services/helpers";
-import { MetricsCard } from "../metricscard/metricscard";
-import styles from "./metricsbox.module.css";
+import { WeatherParam } from "../weatherparameter/weatherparameter";
+import styles from "./parameters.module.css";
 import { WindCardinal, Visibility, TimeFromTs, WindSpeed, TimePeriod } from "../../util";
 import PropTypes from 'prop-types';
 
-export const MetricsBox = ({ weatherData, unit }) => {
+export const WeatherParameters = ({ weatherData, unit }) => {
   return (
     <div className={styles.wrapper}>
       { weatherData && Object.keys(weatherData).length != 0 && (
       <>  
-      <MetricsCard
+      <WeatherParam
         title={"Humidity"}
         iconSrc={"/icons/humidity.png"}
         metric={weatherData.main.humidity}
         unit={"%"}
       />
-      <MetricsCard
+      <WeatherParam
         title={"Wind speed"}
         iconSrc={"/icons/wind.png"}
         metric={WindSpeed(weatherData.wind.speed, unit)}
         unit={unit==='metric'?'m/s':'mi/h'}
       />
-      <MetricsCard
+      <WeatherParam
         title={"Wind direction"}
         iconSrc={"/icons/compass.png"}
         metric={WindCardinal(weatherData.wind.deg)}
       />
-      <MetricsCard
+      <WeatherParam
         title={"Visibility"}
         iconSrc={"/icons/view.png"}
         metric={Visibility(weatherData.visibility, unit)}
         unit={unit==='metric'?'km':'mi'}
       />
-      <MetricsCard
+      <WeatherParam
         title={"Sunrise"}
         iconSrc={"/icons/sunrise.png"}
         metric={TimeFromTs(weatherData.sys.sunrise, weatherData.timezone)}
         unit={TimePeriod(weatherData.sys.sunrise)}
       />
-      <MetricsCard
+      <WeatherParam
         title={"Sunset"}
         iconSrc={"/icons/sunset.png"}
         metric={TimeFromTs(weatherData.sys.sunset, weatherData.timezone)}
@@ -55,7 +48,7 @@ export const MetricsBox = ({ weatherData, unit }) => {
   );
 };
 
-MetricsBox.propTypes = {
+WeatherParameters.propTypes = {
   weatherData : PropTypes.object,
   unit : PropTypes.string
 }

@@ -1,10 +1,10 @@
-import styles from "./contentbox.module.css";
+import styles from "./detail.module.css";
 import PropTypes from 'prop-types';
 
-export const ContentBox = ({ children }) => {
+export const WeatherDetail = ({ children }) => {
   return <div className={styles.wrapper}>{children}</div>;
 };
 
-ContentBox.propTypes = {
+WeatherDetail.propTypes = {
   children : PropTypes.node
 };

@@ -1,11 +1,9 @@
 import { useState, useEffect } from 'react';
 import styles from './css/home.module.css'
-import { MainCard } from './components/maincard/maincard';
-import { ContentBox } from './components/contentbox/contentbox';
-import { Header } from './components/header/header'
-import { DateTime } from './components/datetime/datetime';
-import { Search } from './components/search/search';
-import { MetricsBox } from './components/metricsbox/metricsbox';
+import { WeatherSummary } from './components/summary/summary';
+import { WeatherDetail } from './components/detail/detail';
+import { Filter } from './components/filter/filter';
+import { WeatherParameters } from './components/parameters/parameters';
 import { ToggleBox } from './components/togglebox/togglebox';
 import { FutureDays, FormattedForecastHourWise, WeatherApi, ApiError } from './util';
 import { toast } from 'react-toastify';
@@ -97,12 +95,11 @@ function App() {
     </div>
 
     <div className={styles.wrapper}>
-      <MainCard weatherData={weatherData} unit={unit} />
-      <ContentBox>
-        <Header>
-          <DateTime weatherData={weatherData} />
-          <Search 
-            placeHolder="Search a city..." 
+      <WeatherSummary weatherData={weatherData} unit={unit} />
+      <WeatherDetail>
+        <Filter 
+          weatherData={weatherData}
+          placeHolder="Search a city..." 
             onFocus={(e) => {
               console.log('focus ' + e.target)
               e.target.value = "";
@@ -115,10 +112,10 @@ function App() {
               e.keyCode === 13 && doRefresh(!isRefresh);
               e.target.placeholder = "Search a city...";
             }} 
-          value={city}/>
-        </Header>
-        <MetricsBox weatherData={weatherData} unit={unit} />
-      </ContentBox>
+          value={city}
+        />
+        <WeatherParameters weatherData={weatherData} unit={unit} />
+      </WeatherDetail>
     </div>
     </>
   );

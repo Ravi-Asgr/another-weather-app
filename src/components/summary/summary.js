@@ -1,8 +1,8 @@
-import styles from "./maincard.module.css";
+import styles from "./summary.module.css";
 import PropTypes from 'prop-types';
 import { TempWitUnit } from "../../util";
 
-export const MainCard = ({ weatherData, unit }) => {
+export const WeatherSummary = ({ weatherData, unit }) => {
     return (
         <>
         { weatherData && Object.keys(weatherData).length != 0 && (
@@ -21,7 +21,7 @@ export const MainCard = ({ weatherData, unit }) => {
     );
 }
 
-MainCard.propTypes = {
+WeatherSummary.propTypes = {
     weatherData : PropTypes.object,
     unit : PropTypes.string
 }
